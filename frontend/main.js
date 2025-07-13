@@ -124,9 +124,10 @@ function startSession() {
   updateStats();
   updateChart();
 
-  // Use location.host for Codespaces and local
+  // Use backend port 8000 for WebSocket
   let wsProtocol = location.protocol === "https:" ? "wss:" : "ws:";
-  let wsUrl = `${wsProtocol}//${location.host}/ws`;
+  let wsHost = location.hostname + ":8000";
+  let wsUrl = `${wsProtocol}//${wsHost}/ws`;
   ws = new WebSocket(wsUrl);
 
   ws.onopen = () => {};
