@@ -153,11 +153,3 @@ INCO2k25/
 - **Frontend:** HTML, CSS, JavaScript, D3.js
 - **DevOps:** GitHub Codespaces compatible
 
-## Course Alignment
-- Follows the NCO - Innovation and Complexity Management course structure
-- Backend emits FHIR-compliant JSON (can be extended to Rust/Actix)
-- Frontend uses D3.js for all visualization (no high-level charting libs)
-- Real-time, interactive, and user-focused design
-
-## License
-MIT (or as specified by your course) 
