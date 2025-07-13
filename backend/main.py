@@ -4,6 +4,10 @@ from fastapi.responses import JSONResponse
 import asyncio
 import random
 import time
+import os
+import sys
+import threading
+import webbrowser
 
 app = FastAPI()
 
@@ -20,6 +24,15 @@ app.add_middleware(
 data_store = {
     "last_session": None
 }
+
+def open_frontend():
+    # Only open browser if running locally (not in Codespaces or headless)
+    if os.environ.get('CODESPACES') or os.environ.get('GITHUB_CODESPACE_TOKEN'):
+        return
+    # Try to open the frontend/index.html file
+    frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'frontend', 'index.html'))
+    if os.path.exists(frontend_path):
+        webbrowser.open_new_tab('file://' + frontend_path)
 
 @app.get("/")
 def read_root():
@@ -138,3 +151,10 @@ def get_last_session():
     if data_store["last_session"]:
         return JSONResponse(content=data_store["last_session"])
     return JSONResponse(content={"error": "No session data available."}, status_code=404)
+
+if __name__ == "__main__":
+    # Start the backend server (uvicorn)
+    # Open the frontend in a separate thread to avoid blocking
+    threading.Timer(1.5, open_frontend).start()
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

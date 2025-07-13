@@ -1,15 +1,13 @@
 {
-  "name": "Heart Rate Monitor Dev",
-  "image": "mcr.microsoft.com/devcontainers/python:3.11",
-  "features": {},
-  "postCreateCommand": "pip install -r backend/requirements.txt",
+  "name": "INCO2k25 Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/python:3.9",
   "forwardPorts": [8000],
-  "postStartCommand": "/bin/bash .devcontainer/start-backend.sh",
+  "postCreateCommand": "python3 -m venv backend/.venv && source backend/.venv/bin/activate && python3 -m pip install --upgrade pip && python3 -m pip install -r backend/requirements.txt && python3 -m pip install 'uvicorn[standard]'",
+  "postStartCommand": "source backend/.venv/bin/activate && python3 backend/main.py",
   "customizations": {
-    "vscode": {
-      "settings": {},
-      "extensions": [
-        "ms-python.python"
+    "codespaces": {
+      "openFiles": [
+        "frontend/index.html"
       ]
     }
   }

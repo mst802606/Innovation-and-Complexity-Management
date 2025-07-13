@@ -124,7 +124,12 @@ function startSession() {
   updateStats();
   updateChart();
 
-  ws = new WebSocket('ws://127.0.0.1:8000/ws');
+  // Dynamic WebSocket URL for local and Codespaces
+  let wsProtocol = location.protocol === "https:" ? "wss:" : "ws:";
+  let wsHost = location.host;
+  let wsUrl = `${wsProtocol}//${wsHost}/ws`;
+  ws = new WebSocket(wsUrl);
+
   ws.onopen = () => {};
   ws.onmessage = (event) => {
     const msg = JSON.parse(event.data);
