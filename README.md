@@ -121,8 +121,8 @@ python3 -m pip install 'uvicorn[standard]'
 
 ## How to Run in GitHub Codespaces
 1. Open this repository in GitHub Codespaces
-2. The devcontainer will automatically install Python and dependencies
-3. In the Codespaces terminal, run:
+2. The devcontainer will automatically install Python, Node.js, and dependencies
+3. In the Codespaces terminal, run the backend:
    ```sh
    cd backend
    python3 -m venv .venv
@@ -131,8 +131,23 @@ python3 -m pip install 'uvicorn[standard]'
    python3 -m pip install 'uvicorn[standard]'
    uvicorn main:app --reload --host 0.0.0.0 --port 8000
    ```
-4. Use the Codespaces port forwarding feature to access port 8000
-5. Open `frontend/index.html` using the Codespaces file browser and "Preview" feature
+4. In a new terminal, run the frontend (choose one):
+   - **Option A (recommended, Python built-in server):**
+     ```sh
+     cd frontend
+     python3 -m http.server 8080
+     ```
+   - **Option B (Node.js static server):**
+     ```sh
+     npm install -g serve  # if not already installed
+     npx serve . -l 3000
+     ```
+5. Use the Codespaces "Ports" tab to forward and open ports 8000 (backend) and 8080 or 3000 (frontend) in the browser.
+6. Open the frontend in the browser via the forwarded port. The app will automatically connect to the backend WebSocket using the correct Codespaces URL.
+   - **No manual WebSocket URL changes are needed.** The frontend code auto-detects Codespaces and connects to the backend WebSocket at the correct address.
+7. You should see real-time heart rate data visualization with interactive charts.
+
+**Note:** If you see a WebSocket error, ensure both backend and frontend are running, and that the correct ports are forwarded and open in the Codespaces UI.
 
 ## Project Structure
 ```

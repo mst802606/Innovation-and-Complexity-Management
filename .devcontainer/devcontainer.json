@@ -2,7 +2,7 @@
   "name": "INCO2k25 Dev Container",
   "image": "mcr.microsoft.com/devcontainers/python:3.9",
   "forwardPorts": [8000, 8080],
-  "postCreateCommand": "python3 -m venv backend/.venv && source backend/.venv/bin/activate && python3 -m pip install --upgrade pip && python3 -m pip install -r backend/requirements.txt && python3 -m pip install 'uvicorn[standard]'",
+  "postCreateCommand": "python3 -m venv backend/.venv && source backend/.venv/bin/activate && python3 -m pip install --upgrade pip && python3 -m pip install -r backend/requirements.txt && python3 -m pip install 'uvicorn[standard]' && npm install -g serve",
   "postStartCommand": "source backend/.venv/bin/activate && python3 backend/main.py & cd frontend && python3 -m http.server 8080 & cd ..",
   "customizations": {
     "codespaces": {
@@ -11,4 +11,4 @@
       ]
     }
   }
-} 
+}

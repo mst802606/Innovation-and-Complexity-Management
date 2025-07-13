@@ -124,10 +124,17 @@ function startSession() {
   updateStats();
   updateChart();
 
-  // Use backend port 8000 for WebSocket
+  // Use backend port 8000 for WebSocket, support Codespaces and local
   let wsProtocol = location.protocol === "https:" ? "wss:" : "ws:";
-  let wsHost = location.hostname + ":8000";
-  let wsUrl = `${wsProtocol}//${wsHost}/ws`;
+  let wsHost;
+  if (location.hostname.endsWith('.github.dev')) {
+    // Codespaces: replace frontend port with backend port
+    wsHost = location.hostname.replace(/-\d+\./, '-8000.');
+    wsUrl = `${wsProtocol}//${wsHost}/ws`;
+  } else {
+    wsHost = location.hostname + ":8000";
+    wsUrl = `${wsProtocol}//${wsHost}/ws`;
+  }
   ws = new WebSocket(wsUrl);
 
   ws.onopen = () => {};
