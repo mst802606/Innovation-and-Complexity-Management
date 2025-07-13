@@ -124,10 +124,9 @@ function startSession() {
   updateStats();
   updateChart();
 
-  // Dynamic WebSocket URL for local and Codespaces
+  // Use location.host for Codespaces and local
   let wsProtocol = location.protocol === "https:" ? "wss:" : "ws:";
-  let wsHost = location.host;
-  let wsUrl = `${wsProtocol}//${wsHost}/ws`;
+  let wsUrl = `${wsProtocol}//${location.host}/ws`;
   ws = new WebSocket(wsUrl);
 
   ws.onopen = () => {};
