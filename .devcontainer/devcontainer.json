@@ -1,0 +1,16 @@
+{
+  "name": "Heart Rate Monitor Dev",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {},
+  "postCreateCommand": "pip install -r backend/requirements.txt",
+  "forwardPorts": [8000],
+  "postStartCommand": "/bin/bash .devcontainer/start-backend.sh",
+  "customizations": {
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "ms-python.python"
+      ]
+    }
+  }
+} 
